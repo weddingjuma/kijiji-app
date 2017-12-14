@@ -52,9 +52,9 @@ class CrudModel extends MX_Controller
         return $data;
     }
 
-    public function _delete($id){
-        $this->db->where('patient_id', $id);
-        $this->db->delete('tbl_patient');
+    public function _delete($table,$field,$id){
+        $this->db->where($field, $id);
+        $this->db->delete($table);
     }
 
 }

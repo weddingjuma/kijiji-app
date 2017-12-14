@@ -14,12 +14,10 @@ class Crud extends MX_Controller
         $this->load->library('form_validation');
     }
 
-    public function test(){
-        $this->load->view('crud/test');
-    }
 
     public function gender(){
-        $this->load->view('crud/gender');
+        $data['gender'] = $this->CrudModel->_select('tbl_gender');
+        $this->load->view('crud/gender',$data);
     }
 
     public function service(){
@@ -44,6 +42,7 @@ class Crud extends MX_Controller
                 'gender_name' => $this->input->post('gender')
             );
             $this->CrudModel->_insert('tbl_gender', $data);
+            $this->gender();
         }
     }
 
@@ -80,13 +79,25 @@ class Crud extends MX_Controller
     }
 
     public function deletePatient($id){
-        $this->CrudModel->_delete($id);
+        $this->CrudModel->_delete('tbl_patient','patient_id',$id);
         $this->patient();
     }
 
-    public function edit($id){
-
+    public function deleteGender($id){
+        $this->CrudModel->_delete('tbl_gender','gender_id',$id);
+        $this->gender();
     }
+
+    public function deleteService($id){
+        $this->CrudModel->_delete('tbl_service','service_id',$id);
+        $this->service();
+    }
+
+
+
+//    public function edit($id){
+//
+//    }
 
 
 
