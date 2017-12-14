@@ -21,7 +21,8 @@ class Crud extends MX_Controller
     }
 
     public function service(){
-        $this->load->view('crud/service');
+        $data['service'] = $this->CrudModel->_select('tbl_service');
+        $this->load->view('crud/service',$data);
     }
 
     public function patient(){
@@ -55,6 +56,7 @@ class Crud extends MX_Controller
                 'service_name' => $this->input->post('service')
             );
             $this->CrudModel->_insert('tbl_service', $data);
+            $this->service();
         }
     }
 
